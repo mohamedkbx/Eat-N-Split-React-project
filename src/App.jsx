@@ -25,7 +25,7 @@ const initialFriends = [
 export default function App() {
   const [isOpen, setIsOpen] = useState(false);
 
-  function handleAddFriend() {
+  function handleAddFriendTap() {
     setIsOpen((isOpen) => !isOpen);
   }
   return (
@@ -33,7 +33,7 @@ export default function App() {
       <div className="sidebar">
         <FriendList />
         {isOpen && <AddFriendForm />}
-        <Button onAddFriend={handleAddFriend}>{isOpen ? "Close" : "Add Friend"}</Button>
+        <Button onAddFriend={handleAddFriendTap}>{isOpen ? "Close" : "Add Friend"}</Button>
       </div>
       <FormSplitBill />
     </div>
@@ -85,13 +85,23 @@ function Button({ children, onAddFriend }) {
   );
 }
 
-function AddFriendForm({ open }) {
+function AddFriendForm() {
+  const [name, setName] = useState("");
+  const [image, setImage] = useState("");
+
+  function handleFriendName(event) {
+    setName(event.target.value);
+  }
+
+  function handleFriendImage(event) {
+    setImage(event.target.value);
+  }
   return (
     <form className="form-add-friend">
       <label>👫Friend Name</label>
-      <input type="text" />
+      <input type="text" value={name} onChange={handleFriendName} />
       <label>Image URL</label>
-      <input type="text" />
+      <input type="text" value={image} onChange={handleFriendImage} />
       <Button>Add </Button>
     </form>
   );
