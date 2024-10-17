@@ -1,3 +1,4 @@
+import { useState } from "react";
 import "./index.css";
 
 const initialFriends = [
@@ -22,12 +23,17 @@ const initialFriends = [
 ];
 
 export default function App() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  function handleAddFriend() {
+    setIsOpen((isOpen) => !isOpen);
+  }
   return (
     <div className="app">
       <div className="sidebar">
         <FriendList />
-        <AddFriendForm />
-        <Button>Add Friend</Button>
+        {isOpen && <AddFriendForm />}
+        <Button onAddFriend={handleAddFriend}>{isOpen ? "Close" : "Add Friend"}</Button>
       </div>
       <FormSplitBill />
     </div>
@@ -71,11 +77,15 @@ function Friend({ friend }) {
     </li>
   );
 }
-function Button({ children }) {
-  return <button className="button">{children}</button>;
+function Button({ children, onAddFriend }) {
+  return (
+    <button className="button" onClick={onAddFriend}>
+      {children}
+    </button>
+  );
 }
 
-function AddFriendForm() {
+function AddFriendForm({ open }) {
   return (
     <form className="form-add-friend">
       <label>👫Friend Name</label>
