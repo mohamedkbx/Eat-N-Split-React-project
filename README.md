@@ -2,6 +2,10 @@
 
 Eat-n-Split is a React application designed to help users split bills easily among friends and family.
 
+## DEMO Link
+
+https://eat-n-splitv2.netlify.app/
+
 ## Features
 
 - Add and manage expenses
